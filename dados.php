@@ -8,10 +8,12 @@ $tipoP;
 $valorA1;
 $razao;
 $numele;
-$vetDados = array();
+$vetDados = [];
 $soma;
 
 ?>
+
+
 
 <?php
 
@@ -20,17 +22,16 @@ function ma($a, $b, $c)
 
     $soma = $b;
 
-    $vt = array();
     for ($x = 0; $x < $a; $x++) {
 
         $soma  = ($soma + $c);
 
-        $vetDados[$x] =  $soma;
+        $GLOBALS['vetDados'][$x] =  $soma;
     }
 
     for ($x = 0; $x < $a - 0; $x++) {
 
-        echo  $vetDados[$x] . ", ";
+        echo     $GLOBALS['vetDados'][$x] . ", ";
     }
 }
 
@@ -75,6 +76,18 @@ function ma($a, $b, $c)
 
                         ?>
 
+                        <?php
+
+
+                        for ($x = 0; $x < $a - 0; $x++) {
+
+                            echo  $vetDados[$x] . ", ";
+                        }
+
+
+
+
+                        ?>
 
 
 
@@ -84,6 +97,47 @@ function ma($a, $b, $c)
                 </div>
 
 
+                <?php
+
+
+
+
+
+
+                // Tranforma o array $dados em JSON
+                $dados_json = json_encode($vetDados);
+
+
+                /* Cria o arquivo valores.jsonagenda-bs/index.php
+‘w’ : Cria o arquivo e escreve os dados,
+se o arquivo já existir será substituído pelo novo;
+‘a’ : Cria o arquivo e escreve os dados,
+se o arquivo já existir 1,4,7,9,2,5,0);os dados novos serão
+adicionados ao arquivo existente;
+‘r’ : Abre o arquivo que já existe para leitura,
+e somente leitura;
+*/
+                $fp = fopen("valores.json", "w");
+                // Escreve o conteúdo JSON no arquivo
+                fwrite($fp, $dados_json);
+                // Fecha o arquivo
+                fclose($fp);
+
+
+
+                // Atribui o conteúdo do arquivo para variável $arquivo
+                //      $arquivo = file_get_contents('valores.json');
+                // Decodifica o formato JSON e retorna um Objeto
+                //    $json = json_decode($arquivo);
+                // Loop para percorrer o Objeto
+                //  foreach ($json as $value) {
+                //    echo $value . "<br>";
+                //}
+
+
+
+
+                ?>
 
 
 
