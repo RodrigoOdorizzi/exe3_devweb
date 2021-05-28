@@ -1,4 +1,17 @@
 <!DOCTYPE html>
+
+
+<?php
+$nomearqui;
+$tipoP;
+$valorA1;
+$razao;
+$numele;
+
+
+?>
+
+
 <html lang="pt-BR">
 
 <head>
@@ -19,12 +32,38 @@
 <?php
 
 
-$nomearqui;
-$tipoP;
-$valorA1;
-$razao;
-$numele;
 
+
+if (isset($_POST['a1'])) {
+
+    $GLOBALS['valorA1'] = $_POST['a1'];
+}
+if (isset($_POST['razao'])) {
+
+    $GLOBALS['razao'] = $_POST['razao'];
+}
+if (isset($_POST['qtdele'])) {
+
+    $GLOBALS['numele'] = $_POST['qtdele'];
+}
+if (isset($_POST['nomearq'])) {
+
+    $GLOBALS['nomearqui'] = $_POST['nomearq'];
+}
+if (isset($_POST['tipoP'])) {
+
+    $GLOBALS['tipoP']  = $_POST['tipoP'];
+}
+
+?>
+
+<?php
+
+function mostrando()
+{
+
+    echo " teste";
+}
 
 ?>
 
@@ -43,16 +82,19 @@ $numele;
 
                 <div class="formulario">
 
-                    <form action="result.php" method="POST">
+                    <form action="dados.php" method="POST">
 
-                        <input type="text" name="a1" id="a1" style="width: 600px; margin-bottom:10px;" class="aio" value="Informe valor de A1">
+                        <h3> Informe valor de A1</h3>
+                        <input type="text" name="a1" id="a1" style="width: 600px; margin-bottom:10px;" class="aio" value="...">
 
-                        <input type="text" name="razao" id="razao" style="width: 600px; margin-bottom: 10px;" value="Informe valor da razao" class="razao">
+                        <h3> Informe valor da razao</h3>
+                        <input type="text" name="razao" id="razao" style="width: 600px; margin-bottom: 10px;" value="..." class="razao">
 
-                        <input type="text" name="qtdele" id="qtdele" style="width: 600px; margin-bottom: 10px;" value="Informe a quantidade de elementos" class="qtdele">
+                        <h3> Informe a quantidade de elementos</h3>
+                        <input type="text" name="qtdele" id="qtdele" style="width: 600px; margin-bottom: 10px;" value="..." class="qtdele">
 
-
-                        <input type="text" name="qtdele" id="qtdele2" style="width: 600px; margin-bottom: 10px;" value="Informe nome do arquivo" class="qtdele2">
+                        <h3> Informe nome do arquivo</h3>
+                        <input type="text" name="nomearq" id="nomearq" style="width: 600px; margin-bottom: 10px;" value="..." class="nomearquivo">
 
                         <div class="select">
 
@@ -74,13 +116,14 @@ $numele;
                         </div>
 
 
-                        <a href="result.php" target="_black">
 
-                            <input type="submit" name="subimite" value="Salvar" style="width: 308px;" class="meubotao">
+                        <input type="submit" name="subimite" value="Salvar" style="width: 308px;" class="meubotao">
 
-                        </a>
+
 
                     </form>
+
+
 
                 </div>
 
