@@ -35,13 +35,37 @@ $d = $_POST['namea'];
     <div class="con" style=" width: 600px;margin:auto; border:1px solid #000;">
 
 
-        mostrnado
+        mostrando dados
+
+
         <?php
 
-        echo $d;
+
+
+
+
+
+
+        // Atribui o conteúdo do arquivo para variável $arquivo
+        $arquivo = file_get_contents($_POST['envia']);
+        // Decodifica o formato JSON e retorna um Objeto
+        $json = json_decode($arquivo);
+        // Loop para percorrer o Objeto
+
+        //  echo $arquivo;
+
+
+        foreach ($json as $value) {
+            print_r($value);
+        }
+
+
+
 
 
         ?>
+
+
 
     </div>
 

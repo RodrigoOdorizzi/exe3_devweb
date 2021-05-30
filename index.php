@@ -120,7 +120,7 @@ function mostrando()
 
 
 
-                        <input type="submit" name="subimite" value="Salvar" style="width: 308px;" class="meubotao">
+                        <input type="submit" name="subimite" value="Gerar" style="width: 308px;" class="meubotao">
 
 
 
