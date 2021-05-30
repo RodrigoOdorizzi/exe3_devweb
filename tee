@@ -1,16 +1,7 @@
 <!DOCTYPE html>
-
-
-<?php
-$nomearqui;
-$tipoP;
-$valorA1;
-$razao;
-$numele;
-
+ 
 
 ?>
-
 
 
 <html lang="pt-BR">
@@ -71,8 +62,6 @@ function mostrando()
 
 
 <body>
-
-
 
 
     <div class="geral">

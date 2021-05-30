@@ -11,13 +11,15 @@ $numele;
 $vetDados = [];
 $soma;
 
+
+
 ?>
 
 
 
 <?php
 
-function ma($a, $b, $c)
+function calculaPA($a, $b, $c)
 {
 
     $soma = $b;
@@ -28,16 +30,44 @@ function ma($a, $b, $c)
 
         $GLOBALS['vetDados'][$x] =  $soma;
     }
+}
 
-    for ($x = 0; $x < $a - 0; $x++) {
 
-        echo     $GLOBALS['vetDados'][$x] . ", ";
+function calculaPG($a, $b, $c)
+{
+
+    $soma = $b;
+
+    for ($x = 0; $x < $a; $x++) {
+
+        $soma  = ($soma * $c);
+
+        $GLOBALS['vetDados'][$x] =  $soma;
     }
 }
 
 
 
 ?>
+
+
+<?php
+$a = $_POST['qtdele'];
+$b = $_POST['a1'];
+$c = $_POST['razao'];
+$d = $_POST["nomearq"];
+$e = $_POST["tipoP"];
+
+
+
+if ($e == "PA") {
+
+    calculaPA($a, $b, $c);
+} else
+    calculaPG($a, $b, $c);
+?>
+
+
 
 <html lang="en">
 
@@ -68,15 +98,6 @@ function ma($a, $b, $c)
                     <p>
 
                         <?php
-                        $a = $_POST['qtdele'];
-                        $b = $_POST['a1'];
-                        $c = $_POST['razao'];
-
-                        ma($a, $b, $c);
-
-                        ?>
-
-                        <?php
 
 
                         for ($x = 0; $x < $a - 0; $x++) {
@@ -84,12 +105,18 @@ function ma($a, $b, $c)
                             echo  $vetDados[$x] . ", ";
                         }
 
-
-
-
                         ?>
 
 
+                    <form action="tee.php" method="POST">
+
+
+                        <input type="hidden" id="nomearq" name="namea" value=" <?php echo $d ?>">
+                        <input type="submit" name="subimite" value="Salvar" style="width: 308px;" class="meubotao">
+
+
+
+                    </form>
 
                     </p>
 
@@ -101,11 +128,22 @@ function ma($a, $b, $c)
 
 
 
+                // Array com dados
+                $co1 = array($vetDados, $_POST['qtdele'],  $a = $_POST['tipoP'], $_POST['a1'], $_POST['razao'], $_POST['nomearq']);
+                //$co1 = array('QTDEle' => $_POST['qtdele'], 'Tipo Pro' => $_POST['tipoP']);
 
+
+
+
+                $dados = array($co1);
+
+
+                $json = file_get_contents("valores.json");
+                $data = json_decode($json);
 
 
                 // Tranforma o array $dados em JSON
-                $dados_json = json_encode($vetDados);
+                $dados_json = json_encode($dados);
 
 
                 /* Cria o arquivo valores.jsonagenda-bs/index.php
@@ -145,6 +183,10 @@ e somente leitura;
             </div>
         </div>
     </div>
+
+
+
+
 </body>
 
 </html>
