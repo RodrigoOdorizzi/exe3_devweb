@@ -58,16 +58,6 @@ if (isset($_POST['tipoP'])) {
 
 ?>
 
-<?php
-
-function mostrando()
-{
-
-    echo " teste";
-}
-
-?>
-
 
 
 <body>

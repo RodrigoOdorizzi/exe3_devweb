@@ -8,7 +8,7 @@ $tipoP;
 $valorA1;
 $razao;
 $numele;
-$vetDados = [];
+$vetDados = array();
 $soma;
 
 
@@ -22,13 +22,17 @@ $soma;
 function calculaPA($a, $b, $c)
 {
 
+
     $soma = $b;
 
-    for ($x = 0; $x < $a; $x++) {
+    $GLOBALS['vetDados'][0] =  intval($b);
+
+    for ($x = 1; $x < $a; $x++) {
 
         $soma  = ($soma + $c);
 
-        $GLOBALS['vetDados'][$x] =  $soma;
+
+        $GLOBALS['vetDados'][$x] = $soma;
     }
 }
 
@@ -38,7 +42,10 @@ function calculaPG($a, $b, $c)
 
     $soma = $b;
 
-    for ($x = 0; $x < $a; $x++) {
+
+    $GLOBALS['vetDados'][0] =  intval($b);
+
+    for ($x = 1; $x <  $a; $x++) {
 
         $soma  = ($soma * $c);
 
@@ -61,7 +68,6 @@ $e = $_POST["tipoP"];
 
 
 if ($e == "PA") {
-
     calculaPA($a, $b, $c);
 } else
     calculaPG($a, $b, $c);
@@ -70,12 +76,11 @@ if ($e == "PA") {
 
 
 
-
 <?php
 
 
 
-$co1 = array($vetDados,   $_POST['qtdele'],   $_POST['tipoP'],    $_POST['a1'],   $_POST['razao'],   $_POST['nomearq']);
+$co1 = array($vetDados);
 
 // Array com dados
 //     $dados = array($vetDados, $_POST['qtdele'],  $a = $_POST['tipoP'], $_POST['a1'], $_POST['razao'], $_POST['nomearq']);
@@ -104,18 +109,6 @@ $fp = fopen($_POST['nomearq'] . ".json", "w");
 fwrite($fp, $dados_json);
 // Fecha o arquivo
 fclose($fp);
-
-
-
-
-// Atribui o conteúdo do arquivo para variável $arquivo
-//      $arquivo = file_get_contents('valores.json');
-// Decodifica o formato JSON e retorna um Objeto
-//    $json = json_decode($arquivo);
-// Loop para percorrer o Objeto
-//  foreach ($json as $value) {
-//    echo $value . "<br>";
-//}
 
 
 ?>
