@@ -10,14 +10,24 @@ $razao;
 $numele;
 $vetDados = array();
 $soma;
+$a = $_POST['qtdele'];
+$b = $_POST['a1'];
+$c = $_POST['razao'];
+$d = $_POST["nomearq"];
+$e = $_POST["tipoP"];
 
 
 
-?>
+
+//$local = "C:\xampp\htdocs\exe3_devweb" . $_POST['nomearq'] . ".json";
+$re = realpath($_SERVER["DOCUMENT_ROOT"]);
+//echo $re;
+$local3 = chr(92);
+$local4 = "e";
+$local2 = $local3 . $local4 . "xe3_devweb";
+$localofi = $re . $local2 . $local3 . $_POST['nomearq'] . ".json";
 
 
-
-<?php
 
 function calculaPA($a, $b, $c)
 {
@@ -58,12 +68,8 @@ function calculaPG($a, $b, $c)
 ?>
 
 
+
 <?php
-$a = $_POST['qtdele'];
-$b = $_POST['a1'];
-$c = $_POST['razao'];
-$d = $_POST["nomearq"];
-$e = $_POST["tipoP"];
 
 
 
@@ -80,11 +86,7 @@ if ($e == "PA") {
 
 
 
-$co1 = array($vetDados);
-
-// Array com dados
-//     $dados = array($vetDados, $_POST['qtdele'],  $a = $_POST['tipoP'], $_POST['a1'], $_POST['razao'], $_POST['nomearq']);
-//$co1 = array('QTDEle' => $_POST['qtdele'], 'Tipo Pro' => $_POST['tipoP']);
+$co1 = $vetDados;
 
 
 
@@ -92,7 +94,7 @@ $co1 = array($vetDados);
 $dados = array($co1);
 
 // Tranforma o array $dados em JSON
-$dados_json = json_encode($dados);
+$dados_json = json_encode($co1);
 
 
 /* Cria o arquivo valores.jsonagenda-bs/index.php
@@ -104,11 +106,13 @@ adicionados ao arquivo existente;
 ‘r’ : Abre o arquivo que já existe para leitura,
 e somente leitura;
 */
-$fp = fopen($_POST['nomearq'] . ".json", "w");
+$fp = fopen($localofi, "w");
 // Escreve o conteúdo JSON no arquivo
 fwrite($fp, $dados_json);
 // Fecha o arquivo
 fclose($fp);
+
+
 
 
 ?>
@@ -139,28 +143,50 @@ fclose($fp);
 
             <div class="fa">
 
-
                 <h1>
 
-                    Gerado Arquivo com sucesso!!!</h1>
-
-                <div class="fa">
+                    Gerado Arquivo JSON com sucesso!!!</h1>
 
 
 
-                    <form action="dados2.php" method="POST">
-                        <input type="hidden" name="nomear" id="nomear" value="<?php echo $d ?>">
+                <div class="elemen">
 
-                        <a href="dados2.php">
-                            <input type="submit" name="subimite" value="    Fazer download do arquivo: " style="width: 308px;" class="meubotao">
-                        </a>
+                    <a href="<?php echo ($d . ".json") ?> " download style="text-decoration: none;">
+                        <h2> baixar Aqui!!!</h2>
 
-                    </form>
+                    </a>
 
                 </div>
 
 
 
+
+
+
+
+
+
+
+
+                <div class="elemen" style="margin-bottom: 10px;">
+
+
+                    <p> Enviar arquivo JSON</p>
+                    <form action="tee.php" method="POST">
+
+
+                        <input type="hidden" id="namearr" name="namearr">
+
+                        arquivo: <input type="file" name="envia">
+
+                        <input type="submit" name="subimite" value="Enviar arquivo" style="width: 308px;" class="meubotao">
+
+
+
+                    </form>
+
+
+                </div>
 
 
 

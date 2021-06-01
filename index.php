@@ -72,6 +72,9 @@ if (isset($_POST['tipoP'])) {
             <div class="fa">
 
                 <h1> Gerador de PA / PG </h1>
+                <br>
+                <h3> Insira os dados para geração da progressão. </h3>
+
 
                 <div class="formulario">
 

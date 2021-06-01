@@ -3,37 +3,122 @@
 <?php
 
 
+$d = $_POST['namearr'];
+$e = $_POST['envia'];
 
-$d = $_POST['namea'];
-
-
+//print_r($_POST['envia']);
+//print_r($d . '.json');
 
 // Atribui o conteúdo do arquivo para variável $arquivo
-$arquivo = file_get_contents($_POST['envia']);
+$arquivo = file_get_contents($e);
 // Decodifica o formato JSON e retorna um Objeto
-$json = json_decode($arquivo);
+$json = json_decode($arquivo, true);
 // Loop para percorrer o Objeto
 
-//  echo $arquivo;
 
-//echo $json;
+$se0 = $json[0];
+$se1 = $json[1];
+$se2 = $json[2];
 
-//   print_r($json);
+$ca = $se1 - $se0;
+$ca2 = $se2 - $se1;
 
-
-
-//foreach ($json as $valor) {}
-
-print_r($arquivo['vetodados']);
+$firstElement = current($json);
+$tamanho = count($json);
+$somatoria = 0;
 
 
 ?>
+
 
 <?php
+$tipoP;
+$razao;
+$somatoria;
+$media = 0;
+$mediana;
+$par = true;
+$ultimo = $GLOBALS['json'][$GLOBALS['tamanho'] - 1];
+$df;
 
 
+function tipoP($a, $b, $c)
+{
+
+
+    if (($c - $b) == ($b  - $a))
+        $GLOBALS['tipoP']  = "PA";
+    else {
+        $GLOBALS['tipoP'] = "PG";
+    }
+
+    echo $GLOBALS['tipoP'];
+}
+
+
+
+function calcularazao($b, $a)
+{
+
+
+    $pa = "PA";
+
+    if ($GLOBALS['tipoP'] ==  $pa) {
+        $razao = ($b - $a);
+    } else {
+        $razao = ($b / $a);
+    }
+
+    echo  $razao;
+}
+
+
+function somatoria()
+{
+
+
+
+    for ($x = 0; $x < $GLOBALS['tamanho']; $x++) {
+
+
+        $GLOBALS['somatoria'] = $GLOBALS['somatoria'] +  $GLOBALS['json'][$x];
+    }
+
+
+    echo $GLOBALS['somatoria'];
+}
+
+
+
+function media()
+{
+
+    $media = $GLOBALS['somatoria'] / $GLOBALS['tamanho'];
+
+    echo $media;
+}
+
+
+
+function mediana()
+{
+    if ($GLOBALS['tamanho']  % 2 == 0) {
+
+        $mediana =  $GLOBALS['tamanho'] / 2;
+
+        $df = ($GLOBALS['json'][$mediana] + $GLOBALS['json'][$mediana + 1]) / 2;
+    } else {
+
+        $mediana =  $GLOBALS['tamanho'] / 2;
+        $df = floor(($GLOBALS['json'][$mediana]));
+    }
+
+    echo $df;
+}
 
 ?>
+
+
 
 
 
@@ -54,32 +139,6 @@ print_r($arquivo['vetodados']);
 </head>
 
 
-<?php
-
-/*
-
-
-$vetordado = $json[0]->['vetordado'];
-
-
-$tipoprogressao = $json[0]->{'tipoprogressao'};
-$primeirovalor = $json[0]->{'primeirovalor'};
-$razao = $json[0]->{'razao'};
-$nomearquivo = $json[0]->{'nomearquivo'};
-$result;
-
-$total = count((array)$vetordado);
-
-
-if ($tipoprogressao == "PA") {
-
-    $result =  array_sum($vetordado);
-}
-
-
-*/
-
-?>
 
 <body>
 
@@ -96,10 +155,14 @@ if ($tipoprogressao == "PA") {
 
                 <p> Valores da progressão:
                 </p>
+
+
+
             </div>
             <div class="titulo">
 
-                <?php print_r($vetordado); ?>
+                <?php print_r($json);
+                ?>
 
             </div>
 
@@ -114,11 +177,36 @@ if ($tipoprogressao == "PA") {
             </div>
             <div class="titulo">
 
-                <?php print_r($primeirovalor); ?>
+                <?php print_r($firstElement);
+                ?>
 
             </div>
 
         </div>
+
+
+
+
+        <div class="caixa">
+
+            <div class="titulo">Tipo de progressão<p>
+                </p>
+            </div>
+            <div class="titulo">
+
+
+                <?php
+
+                tipoP($se0, $se1, $se2);
+
+
+
+                ?>
+
+            </div>
+
+        </div>
+
 
 
 
@@ -129,19 +217,16 @@ if ($tipoprogressao == "PA") {
             </div>
             <div class="titulo">
 
-                <?php print_r($razao); ?>
+
+
+                <?php
+
+                calcularazao($se1, $se0);
+
+                ?>
+
+
             </div>
-
-        </div>
-
-
-
-        <div class="caixa">
-
-            <div class="titulo">Tipo de progressão<p>
-                </p>
-            </div>
-            <div class="titulo"> <?php print_r($tipoprogressao); ?></div>
 
         </div>
 
@@ -153,7 +238,8 @@ if ($tipoprogressao == "PA") {
                 <p> Quantidade de Números
                 </p>
             </div>
-            <div class="titulo"> <?php print_r($total); ?> </div>
+            <div class="titulo"> <?php echo $tamanho;
+                                    ?> </div>
 
         </div>
 
@@ -164,7 +250,8 @@ if ($tipoprogressao == "PA") {
                 <p> Somatória
                 </p>
             </div>
-            <div class="titulo"> <?php print_r($vetordado); ?></div>
+            <div class="titulo"> <?php somatoria();
+                                    ?></div>
 
         </div>
 
@@ -177,7 +264,8 @@ if ($tipoprogressao == "PA") {
                 <p> média
                 </p>
             </div>
-            <div class="titulo"> <?php print_r($vetordado); ?></div>
+            <div class="titulo"> <?php media();
+                                    ?></div>
 
         </div>
 
@@ -190,7 +278,8 @@ if ($tipoprogressao == "PA") {
                 <p> Mediana
                 </p>
             </div>
-            <div class="titulo"> <?php print_r($vetordado); ?></div>
+            <div class="titulo"> <?php mediana();
+                                    ?></div>
 
         </div>
 
