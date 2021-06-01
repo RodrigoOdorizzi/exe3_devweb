@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 
+
+
+
+
 <?php
 
-
+$validador;
 $d = $_POST['namearr'];
 $e = $_POST['envia'];
 
@@ -16,6 +20,31 @@ $json = json_decode($arquivo, true);
 // Loop para percorrer o Objeto
 
 
+
+
+/*
+//Função para verificar se há alguma letra no vetor
+
+
+function get_numeric()
+{
+
+    for ($x = 0; $x < $GLOBALS['tamanho']; $x++) {
+
+
+        if (is_numeric($GLOBALS['json'][$x])) {
+            $GLOBALS['validador'] = true;
+        } else {
+            echo  $GLOBALS['json'][$x];
+            $GLOBALS['validador'] = false;
+        }
+    }
+    echo $GLOBALS['validador'];
+}
+
+*/
+
+
 $se0 = $json[0];
 $se1 = $json[1];
 $se2 = $json[2];
@@ -26,9 +55,12 @@ $ca2 = $se2 - $se1;
 $firstElement = current($json);
 $tamanho = count($json);
 $somatoria = 0;
+$porcentPA = 0;
+$porcentPG = 0;
 
 
 ?>
+
 
 
 <?php
@@ -64,19 +96,17 @@ function calcularazao($b, $a)
     $pa = "PA";
 
     if ($GLOBALS['tipoP'] ==  $pa) {
-        $razao = ($b - $a);
+        $GLOBALS['razao'] = ($b - $a);
     } else {
-        $razao = ($b / $a);
+        $GLOBALS['razao'] = ($b / $a);
     }
 
-    echo  $razao;
+    echo $GLOBALS['razao'];
 }
 
 
 function somatoria()
 {
-
-
 
     for ($x = 0; $x < $GLOBALS['tamanho']; $x++) {
 
@@ -116,6 +146,47 @@ function mediana()
     echo $df;
 }
 
+
+
+function calcporcent($a, $b, $c)
+{
+
+
+    //  $a= tipo
+    //$b=  tamanho
+    //$c= razao
+
+    $pa = "PA";
+
+
+
+
+    for ($x = 1; $x < $b; $x++) {
+
+
+        if ((($GLOBALS['json'][$x] -  $c) == ($GLOBALS['json'][$x - 1]))) {
+            $GLOBALS['porcentPA']++;
+        }
+
+
+
+
+
+        if ((($GLOBALS['json'][$x] / $c) == ($GLOBALS['json'][$x - 1]))) {
+            $GLOBALS['porcentPG']++;
+        }
+    }
+    $GLOBALS['porcentPA'] = (($GLOBALS['porcentPA'] +  $b) / 2) * 10;
+
+
+    $GLOBALS['porcentPG'] = (($GLOBALS['porcentPG'] +  $b) / 2) * 10;
+
+
+
+
+    echo $GLOBALS['porcentPA'] . "<br>";
+    echo $GLOBALS['porcentPG'] . "<br>";
+}
 ?>
 
 
@@ -145,8 +216,13 @@ function mediana()
     <div class="con" style=" width: 705px;margin:auto; border:1px solid #000;">
 
 
+
+
         <p> mostrando dados
         </p>
+
+
+
 
 
         <div class="caixa">
@@ -284,6 +360,46 @@ function mediana()
         </div>
 
 
+
+        <div class="caixa">
+
+            <div class="titulo">
+
+                <p> Validação do vetor:
+                </p>
+
+
+
+            </div>
+            <div class="titulo">
+                <?php
+
+                /*
+    Chama função 
+    get_numeric();
+
+    if ($validador == true) {
+
+        echo " não há letras no array";
+    } else {
+        echo " há letras";
+    }
+
+*/
+
+
+                //  $a= tipo
+                //$b=  tamanho
+                //$c= razao
+                calcporcent($tipoP, $tamanho, $razao);
+
+
+
+
+                ?>
+            </div>
+
+        </div>
 
 
 
