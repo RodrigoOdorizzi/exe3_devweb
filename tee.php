@@ -182,28 +182,28 @@ function calcporcent($b, $c)
     for ($x = 1; $x < $b; $x++) {
 
 
-        if ((($GLOBALS['json'][$x] -  $c) == ($GLOBALS['json'][$x - 1]))) {
+        if ((($GLOBALS['json'][$x] - $c) == ($GLOBALS['json'][$x - 1]))) {
             $GLOBALS['porcentPA']++;
         }
+    }
 
 
-
-
+    for ($x = 1; $x < $b; $x++) {
 
         if ((($GLOBALS['json'][$x] / $c) == ($GLOBALS['json'][$x - 1]))) {
             $GLOBALS['porcentPG']++;
         }
     }
-    $GLOBALS['porcentPA'] = (($GLOBALS['porcentPA'] +  $b) / 2) * 10;
+
+    $GLOBALS['porcentPA'] = (($GLOBALS['porcentPA'] / $b)  * 100);
+
+    $GLOBALS['porcentPG'] = (($GLOBALS['porcentPG'] /    $b)  * 100);
 
 
-    $GLOBALS['porcentPG'] = (($GLOBALS['porcentPG'] +  $b) / 2) * 10;
 
 
-
-
-    echo $GLOBALS['porcentPA'] . "<br>";
-    echo $GLOBALS['porcentPG'] . "<br>";
+    echo " porcentagem de PA: " . $GLOBALS['porcentPA'] . " %"  . "<br>";
+    echo " porcentagem de PG: " . $GLOBALS['porcentPG'] . " %"  . "<br>";
 }
 ?>
 
@@ -213,6 +213,58 @@ function calcporcent($b, $c)
 
 
 <html lang="pt-BR">
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+
+
+
+
+            ['ValorX', 'VALOR Progressão', {
+                role: 'anotation'
+            }],
+
+            <?php
+
+            for ($x = 0; $x < $tamanho; $x++) {
+
+            ?>
+
+
+
+                [<?php echo $x ?>, <?php echo ($json[$x]) ?>, <?php echo ($json[$x]) ?>],
+                // [$x, 2],
+
+
+
+            <?php   } ?>
+
+
+        ]);
+
+        var options = {
+            title: 'Company Performance',
+            curveType: 'function',
+            legend: {
+                position: 'bottom'
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+
 
 <head>
     <meta charset="UTF-8">
@@ -415,6 +467,13 @@ function calcporcent($b, $c)
 
                 ?>
             </div>
+
+
+
+            <div id="curve_chart" style="width: 900px; height: 500px"></div>
+
+
+
 
         </div>
 

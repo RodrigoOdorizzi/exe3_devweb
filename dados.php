@@ -164,7 +164,7 @@ fclose($fp);
 
                         arquivo: <input type="file" name="arquivo">
 
-                        <input type="submit" name="subimite" value="Enviar arquivo" style="width: 308px;" class="meubotao">
+                        <input type="submit" name="subimite" value="Enviar arquivo" style="width: 308px; margin-top: 20px;" class="meubotao">
 
 
 
