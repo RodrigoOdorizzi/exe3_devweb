@@ -3,8 +3,45 @@
 <?php
 
 
+
 $d = $_POST['namearr'];
 $e = $_POST['envia'];
+$f = $_POST['localofi'];
+
+
+
+
+$_FILES['arquivo'];
+
+print_r($_FILES['arquivo']);
+
+$nomearquivo = $_FILES['arquivo']['name'];
+
+
+
+//$local = "C:\xampp\htdocs\exe3_devweb" . $_POST['nomearq'] . ".json";
+$re = realpath($_SERVER["DOCUMENT_ROOT"]);
+//echo $re;
+$local3 = chr(92);
+$local4 = "e";
+$local2 = $local3 . $local4 . "xe3_devweb";
+$localofi = $re . $local2 . $local3 . $nomearquivo;
+
+
+
+
+
+$caminhoatual = $_FILES['arquivo']['tmp_name'];
+$caminhonovo = $localofi;
+
+move_uploaded_file($caminhoatual, $caminhonovo);
+
+
+$d = $_POST['namearr'];
+$e = $_POST['envia'];
+
+
+
 
 //print_r($_POST['envia']);
 //print_r($d . '.json');

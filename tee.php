@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 
-
-
-
-
 <?php
 
 $validador;
-$d = $_POST['namearr'];
-$e = $_POST['envia'];
+
+
+$_FILES['arquivo'];
+
+$nomearquivo = $_FILES['arquivo']['name'];
+
+
+
+
+//$local = "C:\xampp\htdocs\exe3_devweb" . $_POST['nomearq'] . ".json";
+$re = realpath($_SERVER["DOCUMENT_ROOT"]);
+//echo $re;
+$local3 = chr(92);
+$local4 = "e";
+$local2 = $local3 . $local4 . "xe3_devweb";
+$localofi = $re . $local2 . $local3 . $nomearquivo;
+
+
+
+
+$caminhoatual = $_FILES['arquivo']['tmp_name'];
+$caminhonovo = $localofi;
+
+move_uploaded_file($caminhoatual, $caminhonovo);
+
+
+
 
 //print_r($_POST['envia']);
 //print_r($d . '.json');
 
 // Atribui o conteúdo do arquivo para variável $arquivo
-$arquivo = file_get_contents($e);
+$arquivo = file_get_contents($_FILES['arquivo']['name']);
 // Decodifica o formato JSON e retorna um Objeto
 $json = json_decode($arquivo, true);
 // Loop para percorrer o Objeto
@@ -55,8 +76,8 @@ $ca2 = $se2 - $se1;
 $firstElement = current($json);
 $tamanho = count($json);
 $somatoria = 0;
-$porcentPA = 0;
-$porcentPG = 0;
+$porcentPA = 1;
+$porcentPG = 1;
 
 
 ?>
@@ -148,16 +169,13 @@ function mediana()
 
 
 
-function calcporcent($a, $b, $c)
+function calcporcent($b, $c)
 {
 
 
     //  $a= tipo
     //$b=  tamanho
     //$c= razao
-
-    $pa = "PA";
-
 
 
 
@@ -388,10 +406,9 @@ function calcporcent($a, $b, $c)
 */
 
 
-                //  $a= tipo
                 //$b=  tamanho
                 //$c= razao
-                calcporcent($tipoP, $tamanho, $razao);
+                calcporcent($tamanho, $razao);
 
 
 

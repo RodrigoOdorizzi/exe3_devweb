@@ -17,8 +17,6 @@ $d = $_POST["nomearq"];
 $e = $_POST["tipoP"];
 
 
-
-
 //$local = "C:\xampp\htdocs\exe3_devweb" . $_POST['nomearq'] . ".json";
 $re = realpath($_SERVER["DOCUMENT_ROOT"]);
 //echo $re;
@@ -40,8 +38,6 @@ function calculaPA($a, $b, $c)
     for ($x = 1; $x < $a; $x++) {
 
         $soma  = ($soma + $c);
-
-
         $GLOBALS['vetDados'][$x] = $soma;
     }
 }
@@ -106,7 +102,7 @@ adicionados ao arquivo existente;
 ‘r’ : Abre o arquivo que já existe para leitura,
 e somente leitura;
 */
-$fp = fopen($localofi, "w");
+$fp = fopen($d . ".json", "w");
 // Escreve o conteúdo JSON no arquivo
 fwrite($fp, $dados_json);
 // Fecha o arquivo
@@ -147,8 +143,6 @@ fclose($fp);
 
                     Gerado Arquivo JSON com sucesso!!!</h1>
 
-
-
                 <div class="elemen">
 
                     <a href="<?php echo ($d . ".json") ?> " download style="text-decoration: none;">
@@ -162,22 +156,13 @@ fclose($fp);
 
 
 
-
-
-
-
-
-
                 <div class="elemen" style="margin-bottom: 10px;">
 
 
                     <p> Enviar arquivo JSON</p>
-                    <form action="tee.php" method="POST">
+                    <form action="tee.php" method="POST" enctype="multipart/form-data">
 
-
-                        <input type="hidden" id="namearr" name="namearr">
-
-                        arquivo: <input type="file" name="envia">
+                        arquivo: <input type="file" name="arquivo">
 
                         <input type="submit" name="subimite" value="Enviar arquivo" style="width: 308px;" class="meubotao">
 
